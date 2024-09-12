@@ -42,14 +42,10 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    const codes = this.state.list.map((el)=>el.code)
-    const getNewNum = () => {
-      const newNum = Math.floor(Math.random()*100)  
-      return !codes.includes(newNum)? newNum : getNewNum()  
-    }
+    const lastCode = this.state.list.length ? this.state.list[this.state.list.length - 1].code : 0
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code : getNewNum(), title: 'Новая запись', clicked:0 }], 
+      list: [...this.state.list, { code: lastCode + 1, title: 'Новая запись', clicked:0 }], 
     });
   }
 
@@ -57,7 +53,8 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(code, e) {
+    e.stopPropagation()
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
@@ -73,9 +70,16 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          !item.selected ? item.clicked += 1 : null;
-          item.selected = !item.selected;
-        } else item.selected = false   
+          item.selected = !item.selected
+        } else item.selected = false
+        
+        if (item.selected && !item.clicked) {
+          item.clicked = 1
+        } else if (item.selected && item.clicked) {
+          item.clicked ++
+        }
+        
+
         return item;
       }),
     });

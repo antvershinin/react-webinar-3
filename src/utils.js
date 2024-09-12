@@ -26,3 +26,11 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export const pluralizeNum = number => {
+  const stringNum = String(number);
+  const digitExceptions = stringNum.endsWith('2') || stringNum.endsWith('3') || stringNum.endsWith('4')
+  const tensExceptions = stringNum.includes('12') || stringNum.includes('13') || stringNum.includes('14')
+
+  return ` | Выделяли ${number} раз${(digitExceptions && !tensExceptions) ? 'а' : ''}`;
+};

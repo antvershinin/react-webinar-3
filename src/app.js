@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElement } from './utils.js';
+import { createElement, pluralizeNum } from './utils.js';
 import './styles.css';
 
 /**
@@ -27,9 +27,9 @@ function App({ store }) {
                 onClick={() => store.selectItem(item.code)}
               >
                 <div className="Item-code">{item.code}</div>
-                <div className="Item-title">{item.title} {item.clicked !== 0 && `| Выделяли ${item.clicked} ${[2,3,4].includes(item.clicked) ? 'раза' : 'раз' }`}</div>
+                <div className="Item-title">{item.title} {item.clicked > 0 && pluralizeNum(item.clicked)}</div>
                 <div className="Item-actions">
-                  <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
+                  <button onClick={(e) => {store.deleteItem(item.code, e)}}>Удалить</button>
                 </div>
               </div>
             </div>
