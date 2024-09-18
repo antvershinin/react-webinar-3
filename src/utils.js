@@ -16,6 +16,15 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
   return variants[key] || '';
 }
 
+export function formatSumm (num) {
+  // Форматируем запись числа суммы
+  return `${new Intl.NumberFormat('ru-RU').format(num)} ₽`}
+
+export function getCartTotal (arr) {
+  // Получаем сумму товаров в корзине
+  return arr.reduce((summ, el) => summ + el.price * el.quantity, 0)
+}
+
 /**
  * Генератор чисел с шагом 1
  * Вариант с замыканием на начальное значение в самовызываемой функции.
