@@ -3,27 +3,32 @@ import PropTypes from 'prop-types';
 import { formatSumm } from '../../utils';
 import './style.css';
 import DefaultButton from '../buttons/default-button';
+import { cn as bem } from '@bem-react/classname';
 
-function Item(props) {
+function Item({ item, handleClick = () => {}, forCart = false, buttonTitle = '' }) {
   const callbacks = {
     handleClick: e => {
       e.stopPropagation();
-      props.handleClick(props.item.code);
+      handleClick(item.code);
     },
   };
 
+  const cn = bem('Item');
+
   return (
-    <div className="Item">
-      <div className="Item-code">{props.item.code}</div>
-      <div className="Item-title">
-        {props.item.title}
-        <div className="Item-price">
-          <div>{formatSumm(props.item.price)}</div>
-          {props.forCart && <div  style={{width:'50px', justifyContent:'flex-end'}}>{props.item.quantity} шт.</div>}
+    <div className={cn()}>
+      <div className={cn('code')}>{item.code}</div>
+      <div className={cn('title')}>
+        {item.title}
+        <div className={cn('price')}>
+          <div>{formatSumm(item.price)}</div>
+          {forCart && (
+            <div style={{ width: '50px', justifyContent: 'flex-end' }}>{item.quantity} шт.</div>
+          )}
         </div>
       </div>
-      <div className="Item-actions">
-        <DefaultButton buttonTitle={props.buttonTitle} onClick={callbacks.handleClick}/>
+      <div className={cn('actions')}>
+        <DefaultButton buttonTitle={buttonTitle} onClick={callbacks.handleClick} />
       </div>
     </div>
   );
@@ -37,10 +42,7 @@ Item.propTypes = {
   }).isRequired,
   handleClick: PropTypes.func,
   buttonTitle: PropTypes.string,
-};
-
-Item.defaultProps = {
-  handleClick: () => {},
+  forCart: PropTypes.bool,
 };
 
 export default React.memo(Item);

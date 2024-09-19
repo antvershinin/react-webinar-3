@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-import DefaultButton from '../buttons/default-button';
+import { cn as bem } from '@bem-react/classname';
 
-function Head({ title, button }) {
+function Head({ title = '', children = [] }) {
+  const cn = bem('Head');
+
   return (
-    <div className="Head">
+    <div className={cn()}>
       <h1>{title}</h1>
-      <div className='Head-button'>{button && <DefaultButton buttonTitle={button.buttonTitle} onClick={button.onClick}/>}</div>
+      <div className={cn('content')}>{children}</div>
     </div>
   );
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
-  button:PropTypes.shape({
-    buttonTitle : PropTypes.string,
-    onClick : PropTypes.func
-  })
+  title: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default React.memo(Head);

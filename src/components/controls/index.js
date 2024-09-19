@@ -1,29 +1,24 @@
 import React from 'react';
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import './style.css';
-import { formatSumm, plural } from '../../utils';
+import { cn as bem } from '@bem-react/classname';
+import DefaultButton from '../buttons/default-button';
 
-function Controls({ onCart, cart }) {
-
-  const cartSummary = `${cart.products.length} ${plural(cart.products.length, { one: 'товар', few: 'товара', many: 'товаров' })} / ${formatSumm(cart.total)}`
+function Controls({ onClick = () => {}, buttonTitle = '', children = [] }) {
+  const cn = bem('Controls');
 
   return (
-    <div className="Controls">
-      <div className='Controls-summary'>
-        <span>В корзине: </span>
-        <span style={{fontWeight:'bold'}}>{cart.products.length ? cartSummary : 'пусто'}</span>
-      </div>
-      <button onClick={() => onCart()}>Перейти</button>
+    <div className={cn()}>
+      <div className={cn('content')}>{children}</div>
+      <DefaultButton buttonTitle={buttonTitle} onClick={onClick} />
     </div>
   );
 }
 
 Controls.propTypes = {
-  onCart: PropTypes.func,
-};
-
-Controls.defaultProps = {
-  onCart: () => {},
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+  buttonTitle: PropTypes.string,
 };
 
 export default React.memo(Controls);

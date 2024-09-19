@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Item from '../item';
 import './style.css';
+import { cn as bem } from '@bem-react/classname';
 
-function List({ list, handleClick, buttonTitle, forCart = false }) {
+
+function List({ list = [], handleClick = () => {}, buttonTitle = '', forCart = false }) {
+
+  const cn = bem('List')
 
   return (
-    <div className="List">
+    <div className={cn()}>
       {list && list.map(item => (
-        <div key={item.code} className="List-item">
+        <div key={item.code} className={cn("item")}>
           <Item forCart={forCart} item={item} handleClick={handleClick} buttonTitle={buttonTitle} />
         </div>
       ))}
@@ -23,10 +27,9 @@ List.propTypes = {
     }),
   ).isRequired,
   handleClick: PropTypes.func,
+  buttonTitle:PropTypes.string,
+  forCart:PropTypes.bool
 };
 
-List.defaultProps = {
-  handleClick: () => {},
-};
 
 export default React.memo(List);

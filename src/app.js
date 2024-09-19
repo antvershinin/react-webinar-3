@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
-import List from './components/list';
-import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Modal from './components/modal';
+import MainList from './components/main-list';
 
 /**
  * Приложение
@@ -38,10 +37,19 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Магазин" />
-        <Controls onCart={() => callbacks.onCart(true)} cart={cart} />
-        <List list={list} handleClick={callbacks.onAddToCart} buttonTitle="Добавить" />
+        <MainList
+          cart={cart}
+          onControlsClick={() => callbacks.onCart(true)}
+          list={list}
+          onItemClick={callbacks.onAddToCart}
+        />
       </PageLayout>
-      <Modal isModalOpen={isModalOpen} onCart={() => callbacks.onCart(false)} cart={cart} onRemove={callbacks.onRemoveFromCart}/>
+      <Modal
+        isModalOpen={isModalOpen}
+        onCart={() => callbacks.onCart(false)}
+        cart={cart}
+        onRemove={callbacks.onRemoveFromCart}
+      />
     </>
   );
 }
