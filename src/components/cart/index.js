@@ -12,7 +12,7 @@ function Cart({ cart, onRemove = () => {},  }) {
       <div className={cn()}>
         <List list={cart.products} handleClick={onRemove} forCart buttonTitle="Удалить" />
         <div className={cn('summary')}>
-          <span>Итого</span> {formatSumm(cart.total)}
+          {cart.products.length ? <><span>Итого</span> {formatSumm(cart.total)}</> : <span>Корзина пуста</span>}
         </div>
       </div>
   );
