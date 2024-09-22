@@ -3,6 +3,7 @@ import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Modal from './components/modal';
 import MainList from './components/main-list';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -46,10 +47,11 @@ function App({ store }) {
       </PageLayout>
       <Modal
         isModalOpen={isModalOpen}
-        onCart={() => callbacks.onCart(false)}
-        cart={cart}
-        onRemove={callbacks.onRemoveFromCart}
-      />
+        onClickCloseModal={() => callbacks.onCart(false)}
+        headTitle="Корзина"
+      >
+        <Cart cart={cart} onRemove={callbacks.onRemoveFromCart} />
+      </Modal>
     </>
   );
 }

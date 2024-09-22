@@ -19,12 +19,4 @@
     overflow: hidden;
 }
 
-.Modal-summary {
-    display: flex;
-    align-self: flex-end;
-    justify-content: space-between;
-    width: 150px;
-    margin: 20px 100px 60px 0;
-    font-weight: bold;
-    
-}
+

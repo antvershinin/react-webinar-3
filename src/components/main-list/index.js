@@ -13,12 +13,14 @@ function MainList({ cart, onControlsClick = () => {}, onItemClick = () => {}, li
 
   return (
     <div className={cn()}>
+      <div className={cn('subtitle')}>
       <Controls buttonTitle="Перейти" onClick={onControlsClick}>
         <div>
           <span>В корзине: </span>
           <span style={{ fontWeight: 'bold' }}>{cart.products.length ? cartSummary : 'пусто'}</span>
         </div>
       </Controls>
+      </div>
       <List forCart={false} buttonTitle="Добавить" handleClick={onItemClick} list={list} />
     </div>
   );

@@ -4,13 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 32px 0 20px;
 }
 
-.Head h1 {
-  margin: 0;
-  padding: 20px 20px 10px;
-}
 
-.Head-content {
-  padding: 20px 10px 10px;
-}
+
+
