@@ -7,9 +7,11 @@ import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const store = useStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     store.actions.catalog.load();
@@ -19,7 +21,8 @@ function Main() {
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    count:state.catalog.count
+    count: state.catalog.count,
+    activePage: state.catalog.activePage,
   }));
 
   const callbacks = {
@@ -28,25 +31,39 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     // Получаем данные с сервера в зависимости от отданного индекса из компонента пагинации
-    getIndex : useCallback((i)=>store.actions.catalog.load(i))
+    getIndex: useCallback(i => {
+      store.actions.catalog.setActivePage(i)
+      store.actions.catalog.load();
+    }),
+    // Переходим на страницу продукта
+    viewProductDedails: useCallback(id => navigate(`/product/${id}`)),
   };
 
   const renders = {
     item: useCallback(
       item => {
-        return <Item item={item} onAdd={callbacks.addToBasket} />;
+        return (
+          <Item
+            item={item}
+            onAdd={callbacks.addToBasket}
+            onProductClick={callbacks.viewProductDedails}
+          />
+        );
       },
       [callbacks.addToBasket],
     ),
   };
-
 
   return (
     <PageLayout>
       <Head title="Магазин" />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
       <List list={select.list} renderItem={renders.item} />
-      <Pagination onClickPage={callbacks.getIndex} pageCount={Math.ceil(select.count / 10)}/>
+      <Pagination
+        onClickPage={callbacks.getIndex}
+        activePage={select.activePage}
+        pageCount={Math.ceil(select.count / 10)}
+      />
     </PageLayout>
   );
 }

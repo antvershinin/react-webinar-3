@@ -10,12 +10,13 @@ function ItemBasket(props) {
 
   const callbacks = {
     onRemove: e => props.onRemove(props.item._id),
+    onProductClick: e => props.onProductClick(props.item._id),
   };
 
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>{props.item.title}</div>
+      <div className={cn('title')} onClick={callbacks.onProductClick}>{props.item.title}</div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>
@@ -35,6 +36,7 @@ ItemBasket.propTypes = {
     amount: PropTypes.number,
   }).isRequired,
   onRemove: propTypes.func,
+  onProductClick:PropTypes.func
 };
 
 ItemBasket.defaultProps = {

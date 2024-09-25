@@ -4,15 +4,19 @@
     padding: 22px 21px 229px;
 }
 
-.Pagination-button {
+.Pagination-wrapper button {
     width: 20px;
     height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.Pagination-active {
+.Pagination-wrapper button.active, .Pagination-wrapper button.active:hover{
     background-color: #0087E9;
     color: white;
 }
@@ -20,10 +24,20 @@
 
 .Pagination-wrapper {
     display: flex;
-    gap: 20px;
 }
 
-.Pagination-button:hover {
+.Pagination-wrapper button:hover {
     cursor: grab;
     background-color: #E1E1E1;
+}
+
+.Pagination-divider {
+    height: 20px;
+    width: 20px;
+}
+
+.Pagination-divider:hover {
+    height: 20px;
+    width: 20px;
+    cursor: default
 }

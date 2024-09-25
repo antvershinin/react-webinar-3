@@ -9,12 +9,15 @@ function Item(props) {
 
   const callbacks = {
     onAdd: e => props.onAdd(props.item._id),
+    onProductClick: e => props.onProductClick(props.item._id),
   };
 
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>{props.item.title}</div>
+      <div className={cn('title')} onClick={callbacks.onProductClick}>
+        {props.item.title}
+      </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd}>Добавить</button>
@@ -30,6 +33,7 @@ Item.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
+  onProductClick: PropTypes.func,
 };
 
 Item.defaultProps = {
