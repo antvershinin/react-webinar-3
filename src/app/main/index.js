@@ -8,13 +8,16 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
 import { useNavigate } from 'react-router-dom';
+import { useLocale } from '../../hooks/localization/locale-provider';
 
 function Main() {
   const store = useStore();
   const navigate = useNavigate();
+  const { translate } = useLocale()
+  let limit = 10
 
   useEffect(() => {
-    store.actions.catalog.load();
+    store.actions.catalog.load(limit);
   }, []);
 
   const select = useSelector(state => ({
@@ -33,7 +36,7 @@ function Main() {
     // Получаем данные с сервера в зависимости от отданного индекса из компонента пагинации
     getIndex: useCallback(i => {
       store.actions.catalog.setActivePage(i)
-      store.actions.catalog.load();
+      store.actions.catalog.load(limit);
     }),
     // Переходим на страницу продукта
     viewProductDedails: useCallback(id => navigate(`/product/${id}`)),
@@ -56,13 +59,13 @@ function Main() {
 
   return (
     <PageLayout>
-      <Head title="Магазин" />
+      <Head title={translate('shop')} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
       <List list={select.list} renderItem={renders.item} />
       <Pagination
         onClickPage={callbacks.getIndex}
         activePage={select.activePage}
-        pageCount={Math.ceil(select.count / 10)}
+        pageCount={Math.ceil(select.count / limit)}
       />
     </PageLayout>
   );

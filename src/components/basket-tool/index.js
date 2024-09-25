@@ -5,11 +5,13 @@ import { numberFormat, plural } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import useStore from '../../store/use-store';
+import { useLocale } from '../../hooks/localization/locale-provider';
 
 function BasketTool({ sum, amount, onOpen }) {
   const cn = bem('BasketTool');
   const navigate = useNavigate()
   const store = useStore();
+  const { translate } = useLocale()
 
   const callbacks = {
     handleHome: useCallback( () => {
@@ -20,19 +22,19 @@ function BasketTool({ sum, amount, onOpen }) {
 
   return (
     <div className={cn()}>
-      <span className={cn('home')} onClick={callbacks.handleHome}>Главная</span>
+      <span className={cn('home')} onClick={callbacks.handleHome}>{translate('main')}</span>
       <div>
-        <span className={cn('label')}>В корзине:</span>
+        <span className={cn('label')}>{translate('in-basket')}</span>
         <span className={cn('total')}>
           {amount
             ? `${amount} ${plural(amount, {
-                one: 'товар',
-                few: 'товара',
-                many: 'товаров',
+                one: `${translate('one')}`,
+                few: `${translate('few')}`,
+                many: `${translate('many')}`,
               })} / ${numberFormat(sum)} ₽`
-            : `пусто`}
+            : `${translate('empty')}`}
         </span>
-      <button onClick={onOpen}>Перейти</button>
+      <button onClick={onOpen}>{translate('move')}</button>
       </div>
     </div>
   );

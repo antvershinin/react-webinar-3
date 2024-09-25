@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
+import { useLocale } from '../../hooks/localization/locale-provider';
 
 function ProductDetails(props) {
   const [loading, setLoading] = useState(props.loading);
@@ -9,6 +10,7 @@ function ProductDetails(props) {
   const { product } = props;
   const madeIn = { ...product.madeIn };
   const category = { ...product.category };
+  const {translate} = useLocale()
 
   const callbacks = {
     onAdd: e => props.onAdd(props.product._id)
@@ -23,21 +25,21 @@ function ProductDetails(props) {
     <div className={cn()}>
       <div className={cn('description')}>{product.description}</div>
       <div className={cn('madeIn')}>
-        Страна производитель:{' '}
+        {translate('origin')}:{' '}
         <span className={cn('bold')}>
           {madeIn.title} ({madeIn.code})
         </span>
       </div>
       <div className={cn('category')}>
-        Категория: <span className={cn('bold')}>{category.title}</span>
+        {translate('category')}: <span className={cn('bold')}>{category.title}</span>
       </div>
       <div className={cn('edition')}>
-        Год выпуска: <span className={cn('bold')}>{product.edition}</span>
+        {translate('year')}: <span className={cn('bold')}>{product.edition}</span>
       </div>
       <div className={cn('price')}>
-        <span className={cn('bold')}>Цена: {product.price}</span>
+        <span className={cn('bold')}>{translate('price')}: {product.price}</span>
       </div>
-      <button className={cn('controls')} onClick={callbacks.onAdd}>Добавить</button>
+      <button className={cn('controls')} onClick={callbacks.onAdd}>{translate('add-to-basket')}</button>
     </div>
   );
 }

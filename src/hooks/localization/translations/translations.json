@@ -1,0 +1,43 @@
+{
+  "ru": {
+    "shop": "Магазин", 
+    "main": "Главная",
+    "in-basket": "В корзине:",
+    "move": "Перейти",
+    "add-to-basket": "Добавить",
+    "basket": "Корзина",
+    "empty": "пусто",
+    "close": "Закрыть",
+    "delete": "Удалить",
+    "pc" : "шт",
+    "pcs": "шт",
+    "origin": "Страна-изготовитель",
+    "category": "Категория",
+    "year": "Год выпуска",
+    "price": "Цена",
+    "total": "Итого",
+    "one": "товар",
+    "few": "товара",
+    "many": "товаров"
+  }, "eng": {
+    "shop": "Shop",
+    "main": "Main",
+    "in-basket": "Basket:",
+    "move": "Move",
+    "add-to-basket": "Add",
+    "basket": "Basket",
+    "empty": "empty",
+    "close": "Close",
+    "delete": "Remove",
+    "pc": "pc",
+    "pcs" : "pcs",
+    "origin": "Country of origin",
+    "category": "Categoty",
+    "year": "Year of manufacture",
+    "price": "Price",
+    "total": "Total",
+    "one": "product",
+    "few": "products",
+    "many": "products"
+  }
+}

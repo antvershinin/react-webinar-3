@@ -6,10 +6,12 @@ import BasketTotal from '../../components/basket-total';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import { useNavigate } from 'react-router-dom';
+import { useLocale } from '../../hooks/localization/locale-provider';
 
 function Basket() {
   const store = useStore();
   const navigate = useNavigate()
+  const {translate} = useLocale()
 
   const select = useSelector(state => ({
     list: state.basket.list,
@@ -38,7 +40,7 @@ function Basket() {
   };
 
   return (
-    <ModalLayout title="Корзина" onClose={callbacks.closeModal}>
+    <ModalLayout title={translate('basket')} onClose={callbacks.closeModal}>
       <List list={select.list} renderItem={renders.itemBasket} />
       <BasketTotal sum={select.sum} />
     </ModalLayout>

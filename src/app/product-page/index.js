@@ -30,7 +30,7 @@ function ProductPage() {
 
   return (
     <PageLayout>
-      <Head title="Название товара" />
+      <Head title={select.product.title} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
       {select.product ? <ProductDetails onAdd={callbacks.addToBasket} loading={select.loading} product={select.product}/> : <div>Товар не найден, возвращайтесь назад</div>}
     </PageLayout>

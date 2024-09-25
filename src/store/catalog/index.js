@@ -16,9 +16,9 @@ class Catalog extends StoreModule {
     };
   }
 
-  async load() {
-    const skip = (this.getState().activePage - 1) * 10
-    const response = await fetch(`api/v1/articles?limit=10&skip=${skip}&fields=items(_id, title, price),count`);
+  async load(limit) {
+    const skip = (this.getState().activePage - 1) * limit
+    const response = await fetch(`api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id, title, price),count`);
     const json = await response.json();
     this.setState(
       {
