@@ -6,6 +6,7 @@ import BasketTool from '../../components/basket-tool';
 import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
+import Pagination from '../../components/pagination';
 
 function Main() {
   const store = useStore();
@@ -18,6 +19,7 @@ function Main() {
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    count:state.catalog.count
   }));
 
   const callbacks = {
@@ -25,6 +27,8 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    // Получаем данные с сервера в зависимости от отданного индекса из компонента пагинации
+    getIndex : useCallback((i)=>store.actions.catalog.load(i))
   };
 
   const renders = {
@@ -36,11 +40,13 @@ function Main() {
     ),
   };
 
+
   return (
     <PageLayout>
       <Head title="Магазин" />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
       <List list={select.list} renderItem={renders.item} />
+      <Pagination onClickPage={callbacks.getIndex} pageCount={Math.ceil(select.count / 10)}/>
     </PageLayout>
   );
 }

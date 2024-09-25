@@ -1,0 +1,29 @@
+.Pagination {
+    display: flex;
+    justify-content: flex-end;
+    padding: 22px 21px 229px;
+}
+
+.Pagination-button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Pagination-active {
+    background-color: #0087E9;
+    color: white;
+}
+
+
+.Pagination-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.Pagination-button:hover {
+    cursor: grab;
+    background-color: #E1E1E1;
+}
