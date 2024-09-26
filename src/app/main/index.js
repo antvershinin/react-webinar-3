@@ -65,7 +65,7 @@ function Main() {
       <Pagination
         onClickPage={callbacks.getIndex}
         activePage={select.activePage}
-        pageCount={Math.ceil(select.count / limit)}
+        pageCount={Math.ceil(522 / limit)}
       />
     </PageLayout>
   );

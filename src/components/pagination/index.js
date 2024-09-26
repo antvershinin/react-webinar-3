@@ -21,6 +21,10 @@ function Pagination(props) {
       for (let i = 2; i < props.pageCount; i++) {
         pages.push(i);
       }
+    } else if (props.pageCount === 1) {
+      return
+    } else if (props.pageCount === 2) {
+      pages.push(2)
     } else if (page >= 1 && page <= 2) {
       for (let i = 2; i <= 3; i++) {
         pages.push(i);
@@ -48,7 +52,7 @@ function Pagination(props) {
         {activePage > 3 && props.pageCount > 5 && <div className={cn('divider')}>...</div>}
         {renderPagination(activePage)}
         {activePage < props.pageCount - 2 && props.pageCount > 5 && <div className={cn('divider')}>...</div>}
-        <button className={activePage === props.pageCount ? 'active' : ''} value={props.pageCount}>{props.pageCount}</button>
+        {props.pageCount >= 4 && <button className={activePage === props.pageCount ? 'active' : ''} value={props.pageCount}>{props.pageCount}</button>}
       </div>
     </div>
   );
