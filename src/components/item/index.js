@@ -11,14 +11,15 @@ function Item(props) {
 
   const callbacks = {
     onAdd: e => props.onAdd(props.item._id),
-    onProductClick: e => props.onProductClick(props.item._id),
+    onProductClick: e => {
+      props.onProductClick(props.item._id)},
   };
 
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')} onClick={callbacks.onProductClick}>
-        {props.item.title}
+      <div className={cn('title')}>
+        <span className={cn('title-text')} onClick={callbacks.onProductClick}>{props.item.title}</span>
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>

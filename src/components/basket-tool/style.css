@@ -13,5 +13,9 @@
 
 .BasketTool-home {
   color: #0087E9;
+}
+
+.BasketTool-home:hover {
+  cursor: grab;
   text-decoration: underline;
 }

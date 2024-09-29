@@ -8,7 +8,7 @@ import { useLocale } from '../../hooks/localization/locale-provider';
 
 function ItemBasket(props) {
   const cn = bem('ItemBasket');
-  const {translate} = useLocale()
+  const { translate } = useLocale();
 
   const callbacks = {
     onRemove: e => props.onRemove(props.item._id),
@@ -18,10 +18,15 @@ function ItemBasket(props) {
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')} onClick={callbacks.onProductClick}>{props.item.title}</div>
+      <div className={cn('title')}>
+        <span className={cn('title-text')} onClick={callbacks.onProductClick}>{props.item.title}</span>
+      </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
-        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {translate(`${props.item.amount > 1 ? 'pcs' : 'pc'}`)}</div>
+        <div className={cn('cell')}>
+          {numberFormat(props.item.amount || 0)}{' '}
+          {translate(`${props.item.amount > 1 ? 'pcs' : 'pc'}`)}
+        </div>
         <div className={cn('cell')}>
           <button onClick={callbacks.onRemove}>{translate('delete')}</button>
         </div>
@@ -38,7 +43,7 @@ ItemBasket.propTypes = {
     amount: PropTypes.number,
   }).isRequired,
   onRemove: propTypes.func,
-  onProductClick:PropTypes.func
+  onProductClick: PropTypes.func,
 };
 
 ItemBasket.defaultProps = {

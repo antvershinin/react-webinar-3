@@ -13,7 +13,7 @@ function ProductPage() {
   const { id } = useParams()
 
   useEffect(() => {
-    store.actions.catalog.loadOne(id);
+    store.actions.product.loadOne(id);
   }, [id]);
 
   const callbacks = {
@@ -24,13 +24,15 @@ function ProductPage() {
   const select = useSelector(state => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
-    product:state.catalog.product,
-    loading:state.catalog.productLoading
+    product:state.product.product,
+    loading:state.product.productLoading
   }));
+
+  const product = {...select.product}
 
   return (
     <PageLayout>
-      <Head title={select.product.title} />
+      <Head title={product.title}/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
       {select.product ? <ProductDetails onAdd={callbacks.addToBasket} loading={select.loading} product={select.product}/> : <div>Товар не найден, возвращайтесь назад</div>}
     </PageLayout>
