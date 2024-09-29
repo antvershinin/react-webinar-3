@@ -18,7 +18,7 @@ function ProductPage() {
 
   const callbacks = {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store])
+    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id, true), [store])
   };
 
   const select = useSelector(state => ({
